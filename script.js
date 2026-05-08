@@ -45,7 +45,7 @@ function toggleNightMode() {
         // Na kraju ćemo tu razliku pretvoriti u dane, sate, minute i sekunde
         const pocetnidatum = new Date("October 29, 1972 ").getTime;
         const sada = new Date().getTime();
-        const razlika = pocetnidatum - sada;
+        const razlika = sada - pocetnidatum;
         
         const dani = Math.floor(razlika / (1000 * 60 * 60 * 24));
         const sati = Math.floor((razlika % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
