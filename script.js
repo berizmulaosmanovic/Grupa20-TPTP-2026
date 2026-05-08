@@ -28,4 +28,15 @@ function toggleNightMode() {
         dugme.innerText = "Night Mode";
         localStorage.setItem("nightMode", "false"); // Spremi stanje u localStorage
     }
+    function filtriraj(kategorija) { // Postaviti id "kartica" na odgovarajuce elemente i
+                                      //  pozvati funkciju sa odgovarajućom kategorijom   
+           const sveKartice = document.querySelectorAll(".kartica");
+           sveKartice.forEach(kartica => {
+               if (kategorija === "sve" || kartica.classList.contains(kategorija)) {
+                   kartica.style.display = "block";
+               } else {
+                   kartica.style.display = "none";
+               }
+           }); 
+    }
 }
