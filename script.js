@@ -39,4 +39,20 @@ function toggleNightMode() {
                }
            }); 
     }
+    function azurirajTimer() {
+        // Prvo nam treba početni datum, koji je 29.10.1972. 
+        // Zatim ćemo izračunati razliku između tog datuma i trenutnog vremena
+        // Na kraju ćemo tu razliku pretvoriti u dane, sate, minute i sekunde
+        const pocetnidatum = new Date("October 29, 1972 ").getTime;
+        const sada = new Date().getTime();
+        const razlika = pocetnidatum - sada;
+        
+        const dani = Math.floor(razlika / (1000 * 60 * 60 * 24));
+        const sati = Math.floor((razlika % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minute = Math.floor((razlika % (1000 * 60 * 60)) / (1000 * 60));
+        const sekundi = Math.floor((razlika % (1000 * 60)) / 1000);
+        document.getElementById("timer").innerText = `${dani}d ${sati}h ${minute}m ${sekundi}s`;
+    }
+    setInterval(azurirajTimer, 1000); // Ova funkcija će se pozivati svakih 1000 milisekundi (1 sekund)
+azurirajTimer(); // Poziv funkcije odmah da ne čekamo prvi interval
 }
