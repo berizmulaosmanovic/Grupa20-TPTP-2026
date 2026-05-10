@@ -1,10 +1,11 @@
 /* CSS Varijable */
 :root {
-    --pozadina-glavna: #ffffff;
+    --pozadina-glavna: #76369b1e;
     --boja-teksta: #b67ad1;
     --pozadina-kartice: #ffffff;
     --primarna-boja: #552c88;
     --sekundarna-boja: #A55B4B;
+    --sjenka-dugmeta: #884d3f;
     --boja-obruba: #DCA06D;
     --glavni-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     --razmak: 1rem;
@@ -18,7 +19,8 @@ body.dark-mode {
     --boja-teksta: #065084;
     --pozadina-kartice: #1e1e1e;
     --primarna-boja: #320A6B;
-    --sekundarna-boja: #320A6B;
+    --sekundarna-boja: #6d37b9;
+    --sjenka-dugmeta: #5e2ea1;
     --boja-obruba: #320A6B;
     --timer-boja: #0f3e5f;
 }
@@ -30,7 +32,7 @@ body.dark-mode {
     box-sizing: border-box;
 }
 body {
-   cursor: url(''), auto; /* Postavljanje custom kursora, ostavljeno prazno trenutno */
+    cursor: url(''), auto; /* Postavljanje custom kursora, ostavljeno prazno trenutno */
     font-family: var(--glavni-font);
     background-color: var(--pozadina-glavna);
     color: var(--boja-teksta);
@@ -42,6 +44,8 @@ body {
 header {
     background-color: var(--primarna-boja);
     color: #ffffff;
+    border-bottom: 5px solid rgba(0,0,0,0.3); /* Dodaje dubinu na dnu headera */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     padding: var(--razmak) 2rem;
     display: flex; /* Primjena flexboxa */
     justify-content: space-between;
@@ -85,7 +89,63 @@ button#dugme:hover {
     color: white;
     box-shadow: 0 0 15px var(--sekundarna-boja);
     transform: translateY(-2px);
-    cursor: url(''), pointer; /* Promjena kursora na hover, trenutno ostavljamo prazno */
+    cursor: hand; /* Promjena kursora na hover */
+}
+
+/* Stil za sve linkove u footeru */
+footer a {
+    color: var(--boja-teksta);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    border-bottom: 2px solid transparent; /* Dodaje liniju ispod linka */
+}
+
+footer a:hover {
+    color: var(--sekundarna-boja);
+    border-bottom: 2px solid var(--sekundarna-boja); /* Linija postaje vidljiva na hover */
+    padding-bottom: 2px; /* Malo podizanje teksta na hover */
+}
+
+#footerbody {
+    display: flex;
+    flex-direction: column; /* Postavlja elemente jedan ispod drugog */
+    align-items: center;    /* Centrira ih horizontalno */
+    justify-content: center; /* Centrira ih vertikalno (ako ima fiksnu visinu) */
+    text-align: center;      /* Osigurava da je tekst unutar elemenata centriran */
+}
+
+/* Osnovni stil za svako dugme kategorije */
+.filter-btn {
+    background: var(--primarna-boja);
+    line-height: 1;
+    margin-bottom: 1rem;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    /* Slojevita sjena za dubinu */
+    box-shadow: 
+        0 6px 0 #11081d, /* Tamniji dio ispod dugmeta */
+        0 8px 15px rgba(0,0,0,0.4);
+    transition: all 0.1s ease;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.filter-btn:hover {
+    background: var(--sekundarna-boja);
+    transform: translateY(2px);
+    box-shadow: 
+        0 4px 0 var(--sjenka-dugmeta), /* Sjena se pomera bliže dugmetu */
+        0 6px 10px rgba(0,0,0,0.3);
+}
+
+.filter-btn:active {
+    transform: translateY(6px); /* Dugme se potpuno "utisne" */
+    box-shadow: none;
 }
 
 /* CSS Grid ( Glavni sadrzaj ) */
@@ -105,10 +165,34 @@ button#dugme:hover {
     gap: 1.5rem;
 }
 
+/* Eksponati i tabela */
+
+.uvod-sadrzaj {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    text-shadow: 1px 2px 2px #00000050; /* Lagana sjena za bolju čitljivost */
+}
+
+.image-map-sekcija {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.tabela-sekcija {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
 .kartica {
     background-color: var(--pozadina-kartice);
-    border: 1px solid var(--boja-obruba);
-    border-radius: var(--radijus);
+    border: 3px solid var(--boja-obruba);
+    border-radius: 12px;
      transition: box-shadow 5s ease-in-out;
     padding: var(--razmak);
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
@@ -126,10 +210,70 @@ button#dugme:hover {
     margin-bottom: 1rem;
 }
 
+.kartica-link {
+    color: var(--tekst-primarni);
+}
+
+.github-link {
+    color:var(--tekst-primarni);
+}
+
+/* Pozadina sa pikselima */
+.pixel-pozadina {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2; /* Postavlja ih iza svega ostalog */
+    pointer-events: none; /* Omogućava klikove kroz njih */
+    overflow: hidden; /* Sprečava da se pikseli pojavljuju izvan ekrana */
+}
+
+/* Osnovni stil za svaki piksel */
+.pixel {
+    position: absolute;
+    bottom: -100px; /* Početak ispod ekrana */
+    background-color: var(--primarna-boja);
+    opacity: 0.15; /* Lagano prozirni za suptilniji efekt */
+    animation: floatUp linear infinite;
+}
+
+/* Tamni mod - pikseli su tamniji i manje vidljivi */
+body.dark-mode .pixel {
+    background-color: var(--sekundarna-boja);
+    opacity: 0.3;
+}
+
+/* Različite veličine, brzine i pozicije za svaki piksel */
+.p1 { left: 10%; width: 40px; height: 40px; animation-duration: 12s; animation-delay: 0s; } 
+.p2 { left: 35%; width: 20px; height: 20px; animation-duration: 18s; animation-delay: 2s; }
+.p3 { left: 55%; width: 60px; height: 60px; animation-duration: 15s; animation-delay: 4s; }
+.p4 { left: 75%; width: 15px; height: 15px; animation-duration: 10s; animation-delay: 1s; }
+.p5 { left: 85%; width: 30px; height: 30px; animation-duration: 20s; animation-delay: 5s; }
+.p6 { left: 20%; width: 25px; height: 25px; animation-duration: 14s; animation-delay: 7s; }
+
 /* Animacija */
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0; /* Fade in */
+    }
+    20% {
+        opacity: 0.15;
+    }
+    80% {
+        opacity: 0.15;
+    }
+    100% {
+        transform: translateY(-110vh) rotate(360deg); /* Kretanje do vrha i rotacija */
+        opacity: 0; /* Fade out na kraju animacije */
+    }
 }
 
 table {
@@ -140,7 +284,7 @@ table {
 }
 
 th, td {
-    padding: 12px;
+    padding: 10px;
     border: 1px solid var(--boja-obruba);
 }
 
