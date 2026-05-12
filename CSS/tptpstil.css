@@ -384,6 +384,63 @@ body.dark-mode .tabela-sekcija tbody tr:hover {
     box-shadow: 0px 0px 0px #11081d; 
 }
 
+/* Lista igara (sekcija) */
+.liste-sekcija {
+    max-width: 800px;
+    margin: 4rem auto;
+    background-color: var(--pozadina-kartice);
+    padding: 3rem;
+    border: 3px dashed var(--primarna-boja);
+    border-radius: 12px;
+}
+
+.liste-sekcija h3 {
+    text-align: center;
+    color: var(--primarna-boja);
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+/* Uklanjamo standardne tačke sa glavne liste */
+.liste-sekcija > ul {
+    list-style: none;
+    padding: 0;
+}
+
+.liste-sekcija > ul > li {
+    font-size: 1.3rem;
+    color: var(--primarna-boja);
+    margin-bottom: 2rem;
+}
+
+/* Stilizacija nabrojanih igara (1, 2, 3...) */
+.liste-sekcija ol {
+    margin-top: 15px;
+    padding-left: 20px;
+    color: var(--boja-teksta);
+}
+
+.liste-sekcija ol li {
+    font-size: 1.1rem;
+    padding: 8px 15px;
+    margin-bottom: 8px;
+    background: rgba(0, 0, 0, 0.03);
+    border-left: 5px solid var(--sekundarna-boja);
+    border-radius: 0 5px 5px 0;
+    transition: all 0.5s ease;
+}
+
+body.dark-mode .liste-sekcija ol li {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Pomiče ime igre blago udesno na hover (Kao odabir u meniju) */
+.liste-sekcija ol li:hover {
+    transform: translateX(10px);
+    background: rgba(165, 91, 75, 0.15);
+    cursor: pointer;
+}
+
 /* Pozadina sa pikselima */
 .pixel-pozadina {
     position: fixed;
