@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!-- OBAVEZNO: DOCTYPE i lang atribut za bosanski jezik -->
+<html lang="bs">
+<head>
+    <!-- OBAVEZNO: UTF-8 encoding i viewport za responzivnost (mobilne uređaje) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Gaming Muzej | Početna</title>
+    
+    <!-- Povezivanje eksternog CSS-a  -->
+    <link rel="stylesheet" href="CSS/tptpstil.css">
+    <!-- Povezivanje eksterne JS datoteke , defer osigurava da se učita nakon HTML-a -->
+    <script src="JS/tptpskripte.js" defer></script>
+</head>
+<body>
+    
+    <!-- Pikseli -->
+    <div class="pixel-pozadina">
+    <div class="pixel p1"></div>
+    <div class="pixel p2"></div>
+    <div class="pixel p3"></div>
+    <div class="pixel p4"></div>
+    <div class="pixel p5"></div>
+    <div class="pixel p6"></div>
+</div>
+
+    <!-- ================= HEADER: Glavna navigacija ================= -->
+    <!-- <header> se koristi za uvodni sadržaj i glavnu navigaciju -->
+    <header>
+        <div class="logo">
+            <h1>Retro Muzej</h1>
+        </div>
+        <nav class="glavna-navigacija">
+            <ul>
+                <li><a href="index.html">Početna</a></li>
+                <li><a href="sadrzaj.html">Eksponati</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
+            </ul>
+        </nav>
+        <div class="header-akcije">
+            <!-- dugme za dark mode -->
+            <button id="dugme">Night Mode</button>
+            <a href="https://github.com/berizmulaosmanovic/Grupa20-TPTP-2026" target="_blank" class="github-link">Naš GitHub</a>
+        </div>
+    </header>
+
+    <!-- Omotač za layout  -->
+    <div class="layout-omotač">
+
+        <!-- ================= NAV: Sekundarna navigacija / Filteri ================= -->
+        <!-- Dodani su 'data-kategorija' atributi kako bi   lakše napravio JS filtriranje -->
+        <nav class="filter-meni">
+            <h2>Kategorije</h2>
+            <ul>
+                <li><button class="filter-btn" data-kategorija="sve">Sve konzole</button></li>
+                <li><button class="filter-btn" data-kategorija="nintendo">Nintendo</button></li>
+                <li><button class="filter-btn" data-kategorija="sega">Sega</button></li>
+                <li><button class="filter-btn" data-kategorija="sony">Sony PlayStation</button></li>
+                <li><button class="filter-btn" data-kategorija="atari">Atari</button></li>
+            </ul>
+        </nav>
+
+        <!-- ================= MAIN: Kartice sa sadržajem ================= -->
+        <main class="galerija-kartica">
+            
+            <!-- Kartica 1 (Nintendo) - Sadrži  <picture> element -->
+            <article class="kartica" data-kategorija="nintendo">
+                <!--  <picture> omogućava WebP format za brže učitavanje, sa fallback-om na obični JPG -->
+                 <img src="slike/nes.jpg" alt="Nintendo Entertainment System (NES) konzola">
+                <h3>NES (1985)</h3>
+                <p>Legendarna 8-bitna konzola koja je spasila industriju videoigara.</p>
+                <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System" class="kartica-link">Pročitaj više</a>
+            </article>
+
+            <!-- Kartica 2 (Sega) -->
+            <article class="kartica" data-kategorija="sega">
+                <img src="slike/sega-genesis.jpg" alt="Sega Genesis 16-bit konzola">
+                <h3>Sega Genesis (1988)</h3>
+                <p>Glavni konkurent SNES-u, poznata po Sonic the Hedgehog igrama.</p>
+                <a href="https://en.wikipedia.org/wiki/Sega_Genesis" class="kartica-link">Pročitaj više</a>
+            </article>
+
+            <!-- Kartica 3 (Sony) -->
+            <article class="kartica" data-kategorija="sony">
+                <img src="slike/ps1.jpg" alt="Originalna Sony PlayStation 1 konzola">
+                <h3>PlayStation 1 (1994)</h3>
+                <p>Prva konzola koja je popularizirala 3D grafiku i CD-ROM format.</p>
+                <a href="https://en.wikipedia.org/wiki/PlayStation_(console)" class="kartica-link">Pročitaj više</a>
+            </article>
+
+            <!-- Kartica 4 (Nintendo) -->
+            <article class="kartica" data-kategorija="nintendo">
+                <img src="slike/gameboy.jpg" alt="Originalni Nintendo Game Boy">
+                <h3>Game Boy (1989)</h3>
+                <p>Ikona prijenosnog gaminga koja je donijela Tetris u džepove igrača.</p>
+                <a href="https://en.wikipedia.org/wiki/Game_Boy" class="kartica-link">Pročitaj više</a>
+            </article>
+
+            <!-- Kartica 5 (Atari) -->
+            <article class="kartica" data-kategorija="atari">
+                <img src="slike/atari2600.jpg" alt="Atari 2600 konzola sa džojstikom">
+                <h3>Atari 2600 (1977)</h3>
+                <p>Pionir kućnih videoigara koji je popularizirao sistem izmjenjivih ketridža.</p>
+                <a href="https://hr.wikipedia.org/wiki/Atari_2600" class="kartica-link">Pročitaj više</a>
+            </article>
+
+            <!-- Kartica 6 (Sega) -->
+            <article class="kartica" data-kategorija="sega">
+                <img src="slike/dreamcast.jpg" alt="Sega Dreamcast konzola">
+                <h3>Sega Dreamcast (1998)</h3>
+                <p>Posljednja Segina konzola, prva sa ugrađenim modemom za online igranje.</p>
+                <a href="https://en.wikipedia.org/wiki/Dreamcast" class="kartica-link">Pročitaj više</a>
+            </article>
+
+        </main>
+
+        <!-- ================= ASIDE: Bočna sekcija (Embed) ================= -->
+        <aside class="bocna-sekcija">
+            <h2>Historija Gaminga</h2>
+            <p>Pogledajte kratki dokumentarac o evoluciji retro konzola.</p>
+            <!--  iframe se koristi za embedovanje YouTube videa. Postavljen je width na 100% za responzivnost -->
+          <iframe width="100%" height="250" src="https://www.youtube.com/embed/vzoAG66Ry2Q?si=4qSQFGndhg065uoB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"   referrerpolicy="strict-origin-when-cross-origin"  allowfullscreen></iframe>
+        </aside>
+
+    </div>
+
+    <!-- ================= FOOTER: Podnožje stranice ================= -->
+    <footer id="footerbody">
+    <p>Vrijeme od početka gaming ere: <span id="timer"></span></p>
+
+        <div class="autori">
+            <p>Projekat izradili: Beriz Mulaosmanović (HTML), Benjamin Džindo (CSS), Benjamin Lokmić (JS)</p>
+            <p>&copy; 2026 TPTP Retro Gaming Muzej</p>
+        </div>
+        <div class="drustvene-mreze">
+            <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Discord</a><!--Nemamo drustvenih mreza, ovo je samo bilo za izgeld stranice-->
+        </div>
+    </footer>
+
+</body>
+</html>

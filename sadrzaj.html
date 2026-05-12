@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eksponati | Retro Gaming Muzej</title>
+    <link rel="stylesheet" href="css/tptpstil.css">
+     <script src="JS/tptpskripte.js" defer></script>
+</head>
+<body>
+
+  <!-- Pikseli -->
+    <div class="pixel-pozadina">
+    <div class="pixel p1"></div>
+    <div class="pixel p2"></div>
+    <div class="pixel p3"></div>
+    <div class="pixel p4"></div>
+    <div class="pixel p5"></div>
+    <div class="pixel p6"></div>
+</div>
+
+    <header>
+        <div class="logo">
+            <h1>Retro Muzej</h1>
+        </div>
+        <nav class="glavna-navigacija">
+            <ul>
+                <li><a href="index.html">Početna</a></li>
+                <li><a href="sadrzaj.html" class="active">Eksponati</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
+            </ul>
+        </nav>
+        <div class="header-akcije">
+            <button id="dugme">Night Mode</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="uvod-sadrzaj">
+            <h2>Detaljan pregled muzejskih eksponata</h2>
+            <p>Istražite tehničke specifikacije i najpoznatije naslove koji su obilježili historiju videoigara.</p>
+        </section>
+
+        <section class="image-map-sekcija">
+            <h3>Interaktivni prikaz: Atari 2600</h3>
+            <p>Kliknite na džojstik ili samu konzolu da saznate više detalja.</p>
+            
+            <img src="slike/atari-map.jpg" usemap="#atari-map" alt="Atari 2600 konzola">
+
+            <map name="atari-map">
+    <area shape="rect" coords="648,100,942,189" alt="Adventure kertridž" href="https://en.wikipedia.org/wiki/Adventure_(1980_video_game)" target="_blank">
+    
+    <area shape="circle" coords="258,188,29" alt="Power prekidač" href="https://en.wikipedia.org/wiki/Atari_2600" target="_blank">
+    
+    <area shape="circle" coords="330,155,28" alt="TV Type prekidač" href="https://en.wikipedia.org/wiki/Atari_2600" target="_blank">
+
+            </map>
+        </section>
+
+        <section class="tabela-sekcija">
+            <h3>Tehničke specifikacije konzola</h3>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Konzola</th>
+                        <th>Proizvođač</th>
+                        <th>Godina izlaska</th>
+                        <th>Procesor</th>
+                        <th>Prodano (milioni)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>NES</td>
+                        <td>Nintendo</td>
+                        <td>1983.</td>
+                        <td>Ricoh 2A03 (8-bit)</td>
+                        <td>61.91</td>
+                    </tr>
+                    <tr>
+                        <td>Sega Genesis</td>
+                        <td>Sega</td>
+                        <td>1988.</td>
+                        <td>Motorola 68000</td>
+                        <td>30.75</td>
+                    </tr>
+                    <tr>
+                        <td>PlayStation 1</td>
+                        <td>Sony</td>
+                        <td>1994.</td>
+                        <td>LSI R3000</td>
+                        <td>102.49</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="liste-sekcija">
+            <h3>Najpopularnije igre po generacijama</h3>
+            <ul>
+                <li><strong>8-bitna era:</strong>
+                    <ol>
+                        <li>Super Mario Bros.</li>
+                        <li>The Legend of Zelda</li>
+                        <li>Pac-Man</li>
+                    </ol>
+                </li>
+                <li><strong>16-bitna era:</strong>
+                    <ol>
+                        <li>Sonic the Hedgehog</li>
+                        <li>Street Fighter II</li>
+                        <li>Donkey Kong Country</li>
+                    </ol>
+                </li>
+            </ul>
+        </section>
+
+        <section class="galerija-sekcija">
+            <h3>Foto galerija rijetkih primjeraka</h3>
+            <div class="galerija-grid">
+                <img src="slike/galerija1.jpg" alt="The Nintendo PlayStation">
+                <img src="slike/galerija2.jpg" alt="The Nintendo Wii Supreme">
+                <img src="slike/galerija3.jpg" alt="The Atari Cosmos">
+                <img src="slike/galerija4.jpg" alt="NES Test Station">
+                <img src="slike/galerija1.jpg" alt="The Nintendo PlayStation"> <!-- Duplicirani set slika za beskonačnu animaciju -->
+                <img src="slike/galerija2.jpg" alt="The Nintendo Wii Supreme">
+                <img src="slike/galerija3.jpg" alt="The Atari Cosmos">
+                <img src="slike/galerija4.jpg" alt="NES Test Station">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Projekat izradili: Beriz Mulaosmanović, Benjamin Lokmić, Benjamin Džindo | © 2026 TPTP Retro Muzej</p>
+    </footer>
+
+</body>
+</html>

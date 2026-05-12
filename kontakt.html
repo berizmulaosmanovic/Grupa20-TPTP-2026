@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt | Retro Gaming Muzej</title>
+    <link rel="stylesheet" href="css/tptpstil.css">
+     <script src="JS/tptpskripte.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>Retro Muzej</h1>
+        </div>
+        <nav class="glavna-navigacija">
+            <ul>
+                <li><a href="index.html">Početna</a></li>
+                <li><a href="sadrzaj.html">Eksponati</a></li>
+                <li><a href="kontakt.html" class="active">Kontakt</a></li>
+            </ul>
+        </nav>
+        <div class="header-akcije">
+            <button id="dugme">Night Mode</button>
+        </div>
+    </header>
+<main>
+        <section class="kontakt-sekcija">
+            <h2>Kontaktirajte nas</h2>
+            <p>Imate staru konzolu koju želite pokloniti muzeju? Pišite nam!</p>
+
+            <form id="kontaktForma" class="retro-forma">
+                <div class="forma-grupa">
+                    <label for="ime">Ime:</label>
+                    <input type="text" id="ime" name="ime" placeholder="Vaše ime...">
+                </div>
+
+                <div class="forma-grupa">
+                    <label for="prezime">Prezime:</label>
+                    <input type="text" id="prezime" name="prezime" placeholder="Vaše prezime...">
+                </div>
+
+                <div class="forma-grupa">
+                    <label for="email">Email adresa:</label>
+                    <input type="email" id="email" name="email" placeholder="primjer@mail.com">
+                </div>
+
+                <div class="forma-grupa">
+                    <label for="tema">Tema upita:</label>
+                    <select id="tema" name="tema">
+                        <option value="opste">Opšta pitanja</option>
+                        <option value="donacija">Donacija opreme</option>
+                        <option value="posjeta">Grupne posjete</option>
+                    </select>
+                </div>
+
+                <div class="forma-grupa">
+                    <p>Da li ste ranije posjećivali retro muzeje?</p>
+                    <input type="radio" id="da" name="posjeta" value="da">
+                    <label for="da">Da</label>
+                    <input type="radio" id="ne" name="posjeta" value="ne">
+                    <label for="ne">Ne</label>
+                </div>
+
+                <div class="forma-grupa">
+                    <label for="poruka">Vaša poruka:</label>
+                    <textarea id="poruka" name="poruka" rows="5" placeholder="Opišite vaše iskustvo sa Retro Muzejem"></textarea>
+                </div>
+
+                <button type="submit" class="dugme-slanje">Pošalji poruku</button>
+                
+                <p id="porukaStatus"></p>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Projekat izradili: Beriz Mulaosmanović, Benjamin Lokmić, Benjamin Džindo | © 2026 TPTP Retro Muzej</p>
+    </footer>
+
+</body>
+</html>

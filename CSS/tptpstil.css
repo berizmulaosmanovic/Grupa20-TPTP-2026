@@ -1,0 +1,564 @@
+/* CSS Varijable */
+:root {
+    --pozadina-glavna: #76369b1e;
+    --boja-teksta: #b67ad1;
+    --pozadina-kartice: #ffffff;
+    --primarna-boja: #552c88;
+    --sekundarna-boja: #A55B4B;
+    --sjenka-dugmeta: #884d3f;
+    --boja-obruba: #DCA06D;
+    --glavni-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --razmak: 1rem;
+    --radijus: 8px;
+    --timer-boja: #aa6bc7;
+}
+
+/* Tamni mod */
+body.dark-mode {
+    --pozadina-glavna: #121212;
+    --boja-teksta: #065084;
+    --pozadina-kartice: #1e1e1e;
+    --primarna-boja: #320A6B;
+    --sekundarna-boja: #6d37b9;
+    --sjenka-dugmeta: #5e2ea1;
+    --boja-obruba: #320A6B;
+    --timer-boja: #0f3e5f;
+}
+
+/* Globali reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    cursor: url(''), auto; /* Postavljanje custom kursora, ostavljeno prazno trenutno */
+    font-family: var(--glavni-font);
+    background-color: var(--pozadina-glavna);
+    color: var(--boja-teksta);
+    line-height: 1.6;
+    transition: background-color 0.4s, color 0.4s ease;
+}
+
+/* Header i Navigacija ( Layout - flexbox ) */
+header {
+    background-color: var(--primarna-boja);
+    color: #ffffff;
+    border-bottom: 5px solid rgba(0,0,0,0.3); /* Dodaje dubinu na dnu headera */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    padding: var(--razmak) 2rem;
+    display: flex; /* Primjena flexboxa */
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.glavna-navigacija ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.glavna-navigacija a {
+   color: #ffffff;
+   text-decoration: none;
+   font-weight: bold;
+   position: relative;
+}
+
+.glavna-navigacija a:hover, .glavna-navigacija a.active {
+    color: var(--sekundarna-boja);
+}
+
+button#dugme {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px; /* Zaobljenije dugme izgleda modernije */
+    padding: 0.6rem 1.4rem;
+    color: #ffffff; /* Zlatna boja teksta za bolji kontrast na tamno plavoj */
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button#dugme:hover {
+    background: var(--sekundarna-boja);
+    color: white;
+    box-shadow: 0 0 15px var(--sekundarna-boja);
+    transform: translateY(-2px);
+    cursor: hand; /* Promjena kursora na hover */
+}
+
+/* Footer Stilizacija */
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+    background-color: var(--primarna-boja);
+    color: white;
+    border-top: 4px solid var(--sekundarna-boja); 
+}
+
+/* Stil za sve linkove u footeru */
+footer a {
+    color: var(--boja-teksta);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    border-bottom: 2px solid transparent; /* Dodaje liniju ispod linka */
+}
+
+footer a:hover {
+    color: var(--sekundarna-boja);
+    border-bottom: 2px solid var(--sekundarna-boja); /* Linija postaje vidljiva na hover */
+    padding-bottom: 2px; /* Malo podizanje teksta na hover */
+}
+
+
+
+/* Osnovni stil za svako dugme kategorije */
+.filter-btn {
+    background: var(--primarna-boja);
+    line-height: 1;
+    margin-bottom: 1rem;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    /* Slojevita sjena za dubinu */
+    box-shadow: 
+        0 6px 0 #11081d, /* Tamniji dio ispod dugmeta */
+        0 8px 15px rgba(0,0,0,0.4);
+    transition: all 0.1s ease;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.filter-btn:hover {
+    background: var(--sekundarna-boja);
+    transform: translateY(2px);
+    box-shadow: 
+        0 4px 0 var(--sjenka-dugmeta), /* Sjena se pomera bliže dugmetu */
+        0 6px 10px rgba(0,0,0,0.3);
+}
+
+.filter-btn:active {
+    transform: translateY(6px); /* Dugme se potpuno "utisne" */
+    box-shadow: none;
+}
+
+/* CSS Grid ( Glavni sadrzaj ) */
+.layout-omotač {
+    display: grid;
+   grid-template-columns: 1fr; /* Mobilni: 1 kolona */
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Grid za kartice eksponata */
+.galerija-kartica {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+/* Eksponati i tabela */
+
+.uvod-sadrzaj {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    border-bottom: solid #8d41ca41;
+    border-radius: 50%;
+    font-weight: bold;
+    color: var(--boja-teksta);
+    text-transform: uppercase;
+     letter-spacing: 1px;
+    text-shadow: 1px 2px 2px #00000091; /* Lagana sjena za bolju čitljivost */
+}
+
+/* Atari prikaz sekcija */
+.image-map-sekcija {
+    max-width: 1200px;
+    margin: 3rem auto;
+    text-align: center;
+    background-color: var(--pozadina-kartice);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 3px dashed var(--primarna-boja);
+    box-shadow: 5px 5px 5px rgba(123, 68, 185, 0.322);
+}
+
+.sadrzaj-atari {
+    max-width: 50%;
+    height: auto;
+}
+
+.image-map-sekcija h3 {
+    color: var(--primarna-boja);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.image-map-sekcija p {
+    color: var(--boja-teksta);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+/* Tabela */
+.tabela-sekcija {
+   margin: 3rem auto;
+   max-width: 800px;
+   text-align: center;
+   color: var(--primarna-boja);
+}
+
+.tabela-sekcija table {
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--pozadina-kartice);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 10px 10px 10px var(--primarna-boja);
+    border: 2px dashed var(--primarna-boja);
+}
+
+.tabela-sekcija th {
+    background-color: var(--primarna-boja);
+    color: #ffffff;
+    padding: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tabela-sekcija td {
+    color: var(--boja-teksta);
+    border-bottom: 1px solid var(--boja-obruba);
+    padding: 15px;
+}
+
+.tabela-sekcija tbody tr:hover {
+    background-color: rgba(165, 91, 75, 0.1);
+}
+
+body.dark-mode .tabela-sekcija tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Kartice sa sadrzajem */
+.kartica {
+    background-color: var(--pozadina-kartice);
+    border: 3px solid var(--boja-obruba);
+    border-radius: 12px;
+     transition: box-shadow 5s ease-in-out;
+    padding: var(--razmak);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    animation: fadeUp 0.6s ease-out; /* Animacija pri učitavanju */
+}
+
+.kartica:hover {
+    transform: translateY(-8px);
+     box-shadow: 0 0 15px 5px var(--sekundarna-boja);
+}
+.kartica img {
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.kartica-link {
+    color: var(--tekst-primarni);
+}
+
+.github-link {
+    color:var(--tekst-primarni);
+}
+
+/* Kontakt stilizacija */
+.kontakt-sekcija {
+    max-width: 650px;
+    margin: 4rem auto;
+    padding: 3rem;
+    background-color: var(--pozadina-kartice); /* Svjetlija pozadina za bolju čitljivost teksta */
+    border: 4px solid var(--primarna-boja);
+    border-radius: 12px;
+    box-shadow: 10px 10px 0px var(--sekundarna-boja); 
+}
+
+/* Stilizacija naslova i teksta unutar kartice */
+.kontakt-sekcija h2 {
+    color: var(--primarna-boja);
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.kontakt-sekcija p {
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px dashed var(--boja-obruba);
+    padding-bottom: 1rem;
+}
+
+/* Grupe polja i labele */
+.forma-grupa {
+    margin-bottom: 1.5rem; /* Razmak između različitih polja */
+}
+
+.forma-grupa label {
+    display: block; /* Stavlja labelu iznad polja za unos */
+    font-weight: bold;
+    color: var(--primarna-boja);
+    margin-bottom: 0.5rem;
+}
+
+/* Redoslijed za "Da/Ne" radio dugmad */
+.forma-grupa input[type="radio"] { 
+    margin-right: 5px;
+    accent-color: var(--sekundarna-boja);
+}
+.forma-grupa input[type="radio"] + label {
+    display: inline-block; /* Ostavlja "Da/Ne" labele u istom redu sa kružićem */
+    margin-right: 20px;
+}
+
+/* Polja za unos (Inputi, Select, Textarea) */
+.retro-forma input[type="text"], /* polje za ime */
+.retro-forma input[type="email"], /* polje za email */
+.retro-forma select, 
+.retro-forma textarea { 
+    width: 100%; 
+    padding: 12px;
+    border: 2px solid var(--boja-obruba);
+    border-radius: 6px;
+    background-color: var(--pozadina-glavna);
+    color: var(--boja-teksta);
+    font-family: var(--glavni-font);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+/* Efekat kada korisnik klikne da piše u polje (Fokus) */
+.retro-forma input:focus,
+.retro-forma select:focus,
+.retro-forma textarea:focus {
+    outline: none;
+    border-color: var(--sekundarna-boja);
+    box-shadow: 0 0 8px rgba(165, 91, 75, 0.4);
+}
+
+/* Dugme */
+.dugme-slanje {
+    width: 100%;
+    padding: 15px;
+    margin-top: 1rem;
+    background-color: var(--primarna-boja);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0px 6px 0px #11081d; 
+    transition: all 0.5s ease; 
+}
+.dugme-slanje:hover {
+    background-color: var(--sekundarna-boja);
+}
+
+.dugme-slanje:active {
+    transform: translateY(6px); /* Dugme se "utisne" u ekran kad se klikne */
+    box-shadow: 0px 0px 0px #11081d; 
+}
+
+/* Lista igara (sekcija) */
+.liste-sekcija {
+    max-width: 800px;
+    margin: 4rem auto;
+    background-color: var(--pozadina-kartice);
+    padding: 3rem;
+    border: 3px dashed var(--primarna-boja);
+    border-radius: 12px;
+}
+
+.liste-sekcija h3 {
+    text-align: center;
+    color: var(--primarna-boja);
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+/* Uklanjamo standardne tačke sa glavne liste */
+.liste-sekcija > ul {
+    list-style: none;
+    padding: 0;
+}
+
+.liste-sekcija > ul > li {
+    font-size: 1.3rem;
+    color: var(--primarna-boja);
+    margin-bottom: 2rem;
+}
+
+/* Stilizacija nabrojanih igara (1, 2, 3...) */
+.liste-sekcija ol {
+    margin-top: 15px;
+    padding-left: 20px;
+    color: var(--boja-teksta);
+}
+
+.liste-sekcija ol li {
+    font-size: 1.1rem;
+    padding: 8px 15px;
+    margin-bottom: 8px;
+    background: rgba(0, 0, 0, 0.03);
+    border-left: 5px solid var(--sekundarna-boja);
+    border-radius: 0 5px 5px 0;
+    transition: all 0.5s ease;
+}
+
+body.dark-mode .liste-sekcija ol li {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Pomiče ime igre blago udesno na hover (Kao odabir u meniju) */
+.liste-sekcija ol li:hover {
+    transform: translateX(10px);
+    background: rgba(165, 91, 75, 0.15);
+    cursor: pointer;
+}
+
+/* Galerija slika */
+.galerija-sekcija {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--pozadina-kartice);
+    border: 3px dashed var(--primarna-boja);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.galerija-sekcija h3 {
+    color: var(--primarna-boja);
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px dotted var(--primarna-boja);
+    border-radius: 40%;
+}
+/* Galerija koristi flexbox za horizontalno pomicanje slika */
+.galerija-grid {
+    height: 300px;
+    display: flex;
+    width: calc(450px * 8);
+    animation: scroll 10s linear infinite;
+}
+/* Svaka slika u galeriji ima fiksnu veličinu i koristi object-fit za održavanje proporcija */
+.galerija-grid img {
+    width: 450px;
+    height: 300px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+
+
+/* Pozadina sa pikselima */
+.pixel-pozadina {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2; /* Postavlja ih iza svega ostalog */
+    pointer-events: none; /* Omogućava klikove kroz njih */
+    overflow: hidden; /* Sprečava da se pikseli pojavljuju izvan ekrana */
+}
+
+/* Osnovni stil za svaki piksel */
+.pixel {
+    position: absolute;
+    bottom: -100px; /* Početak ispod ekrana */
+    background-color: var(--primarna-boja);
+    opacity: 0.15; /* Lagano prozirni za suptilniji efekt */
+    animation: floatUp linear infinite;
+}
+
+/* Tamni mod - pikseli su tamniji i manje vidljivi */
+body.dark-mode .pixel {
+    background-color: var(--sekundarna-boja);
+    opacity: 0.3;
+}
+
+/* Različite veličine, brzine i pozicije za svaki piksel */
+.p1 { left: 10%; width: 40px; height: 40px; animation-duration: 12s; animation-delay: 0s; } 
+.p2 { left: 35%; width: 20px; height: 20px; animation-duration: 18s; animation-delay: 2s; }
+.p3 { left: 55%; width: 60px; height: 60px; animation-duration: 15s; animation-delay: 4s; }
+.p4 { left: 75%; width: 15px; height: 15px; animation-duration: 10s; animation-delay: 1s; }
+.p5 { left: 85%; width: 30px; height: 30px; animation-duration: 20s; animation-delay: 5s; }
+.p6 { left: 20%; width: 25px; height: 25px; animation-duration: 14s; animation-delay: 7s; }
+
+/* Animacija */
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-450px * 4)); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0; /* Fade in */
+    }
+    20% {
+        opacity: 0.15;
+    }
+    80% {
+        opacity: 0.15;
+    }
+    100% {
+        transform: translateY(-110vh) rotate(360deg); /* Kretanje do vrha i rotacija */
+        opacity: 0; /* Fade out na kraju animacije */
+    }
+}
+/* Brojac vremena */
+#timer {
+    color: var(--timer-boja);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    position: relative;
+}
+/* Responsivnost */
+/* Tablet (600px+) */
+@media screen and (min-width: 600px) {
+    .galerija-kartica { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Desktop (900px+) */
+@media screen and (min-width: 900px) {
+    .layout-omotač {
+        grid-template-columns: 200px 1fr 300px; /* Filteri | Kartice | Video */
+    }
+    .galerija-kartica { grid-template-columns: repeat(3, 1fr); }
+}
