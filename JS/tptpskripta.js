@@ -60,3 +60,68 @@ prekidac.addEventListener("click", toggleNightMode); // Dodajemo event listener 
     setInterval(azurirajTimer, 1000); // Ova funkcija će se pozivati svakih 1000 milisekundi (1 sekund)
 azurirajTimer(); // Poziv funkcije odmah da ne čekamo prvi interval
 
+// Funkcija za validaciju forme
+function validirajFormu(event) {
+    // 1. Zaustavi automatsko slanje forme
+    event.preventDefault();
+
+    // 2. Dohvatanje vrijednosti iz polja
+    const ime = document.getElementById("ime").value.trim();
+    const prezime = document.getElementById("prezime").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const poruka = document.getElementById("poruka").value.trim();
+    const statusPolje = document.getElementById("porukaStatus");
+
+    // 3. Resetovanje boje i teksta statusa
+    statusPolje.innerText = "";
+    statusPolje.style.color = "red";
+
+    // 4. Provjera pravila (Validacija)
+    if (ime === "" || prezime === "") {
+        statusPolje.innerText = "Greška: Ime i prezime su obavezni.";
+        return;
+    }
+
+    if (ime.length < 2) {
+        statusPolje.innerText = "Greška: Ime mora imati bar 2 slova.";
+        return;
+    }
+
+    // Ručna provjera emaila (tražimo @ i tačku)
+    if (!email.includes("@") || !email.includes(".")) {
+        statusPolje.innerText = "Greška: Email adresa nije ispravna.";
+        return;
+    }
+
+    if (poruka.length < 10) {
+        statusPolje.innerText = "Greška: Poruka mora biti duža od 10 karaktera.";
+        return;
+    }
+
+    // 5. Ako je sve prošlo, ispiši uspjeh
+    statusPolje.innerText = "Uspješno: Vaša poruka je poslana!";
+    statusPolje.style.color = "green";
+    
+    // Ovdje možeš dodati i reset forme nakon uspjeha
+    document.getElementById("kontaktForma").reset();
+}
+
+// 6. Povezivanje funkcije sa formom (dodaj na dno fajla)
+const forma = document.getElementById("kontaktForma");
+if (forma) {
+    forma.addEventListener("submit", validirajFormu);
+}
+
+// Smooth scroll za bookmark navigaciju
+document.querySelectorAll('a[href^="#"]').forEach(sidro => {
+    sidro.addEventListener('click', function (e) {
+        e.preventDefault(); // Spriječi trenutni skok
+
+        const cilj = document.querySelector(this.getAttribute('href'));
+        if (cilj) {
+            cilj.scrollIntoView({
+                behavior: 'smooth' // Ovo omogućava glatko kretanje
+            });
+        }
+    });
+});
