@@ -856,5 +856,34 @@ body.dark-mode .pixel {
 .retro-forma input.invalid, 
 .retro-forma textarea.invalid {
     border: 2px solid red !important;
+
+   /* Back to Top dugme - Retro Stil */
+#skoci-na-vrh {
+    display: none; /* Sakriveno dok se ne skrola */
+    position: fixed;
+    bottom: 90px; /* Iznad XP bara */
+    right: 30px;
+    z-index: 9999;
+    font-family: var(--retro-font);
+    font-size: 18px;
+    background-color: var(--primarna-boja);
+    color: white;
+    border: 3px solid var(--boja-obruba);
+    padding: 10px 15px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px var(--sjenka-dugmeta);
+    border-radius: var(--radijus);
+    transition: all 0.3s ease;
+}
+
+#skoci-na-vrh:hover {
+    background-color: var(--sekundarna-boja);
+    transform: translateY(-5px);
+}
+
+#skoci-na-vrh:active {
+    transform: translateY(0);
+    box-shadow: 0px 0px 0px;
+}
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 }
