@@ -845,3 +845,16 @@ body.dark-mode .pixel {
     background: linear-gradient(90deg, var(--primarna-boja), var(--sekundarna-boja));
     transition: width 0.2s ease-out;
 }
+/* Stil za tekst greške */
+.error-poruka {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    min-height: 1rem; /* Rezerviše prostor da forma ne "skače" */
+}
+
+/* Vizuelna oznaka za pogrešno polje */
+.retro-forma input.invalid, 
+.retro-forma textarea.invalid {
+    border: 2px solid red !important;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
