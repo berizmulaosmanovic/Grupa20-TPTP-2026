@@ -855,7 +855,7 @@ body.dark-mode .pixel {
 /* Vizuelna oznaka za pogrešno polje */
 .retro-forma input.invalid, 
 .retro-forma textarea.invalid {
-    border: 2px solid red !important;
+    border: 2px solid red !important;}
 
    /* Back to Top dugme - Retro Stil */
 #skoci-na-vrh {
