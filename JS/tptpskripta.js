@@ -169,6 +169,16 @@ function prikaziGresku(idPolja, poruka) {
         });
         
     });
+    // BACK TO TOP KLIK
+    const topDugme = document.getElementById("skoci-na-vrh");
+    if (topDugme) {
+        topDugme.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    }
 // Poruke koje se mijenjaju svakih 2 minute
 const poruke = [
     { rank: "Novajlija",        boja: null,        sjena: null },
@@ -184,6 +194,14 @@ const pocetak = Date.now();
 
 window.onscroll = function() {
     izracunajXP();
+    // 2. Back to Top dugme (Pojavljivanje)
+        if (topDugme) {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                topDugme.style.display = "block";
+            } else {
+                topDugme.style.display = "none";
+            }
+        }
 };
 
 function izracunajXP() {
