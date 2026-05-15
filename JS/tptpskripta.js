@@ -75,29 +75,26 @@ document.addEventListener("DOMContentLoaded", () => {
     setInterval(azurirajTimer, 1000);
     azurirajTimer();
 
-    // VALIDACIJA FORME
-   // VALIDACIJA FORME (Unaprijeđena verzija)
+// VALIDACIJA FORME (Finalna verzija)
 const forma = document.getElementById("kontaktForma");
 if (forma) {
     forma.addEventListener("submit", function(event) {
         event.preventDefault();
 
-        // Dohvatanje polja
         const polja = {
             ime: document.getElementById("ime"),
-            prezime: document.getElementById("prezime"), // Dodaj ovo u HTML ako nemaš
+            prezime: document.getElementById("prezime"),
             email: document.getElementById("email"),
             telefon: document.getElementById("telefon"),
-            tema: document.getElementById("tema"),
             poruka: document.getElementById("poruka")
         };
 
         let validno = true;
 
-        // Funkcija za čišćenje prethodnih grešaka
+        // Očisti sve prethodne greške i stilove
         Object.values(polja).forEach(p => {
             if(p) {
-                p.style.borderColor = "";
+                p.classList.remove("invalid"); // Briše crvenu klasu
                 const errorSpan = document.getElementById(p.id + "Error");
                 if(errorSpan) errorSpan.innerText = "";
             }
@@ -109,20 +106,26 @@ if (forma) {
             validno = false;
         }
 
-        // 2. Validacija Emaila (Regex)
+        // 2. Validacija Prezimena
+        if (polja.prezime.value.trim().length < 2) {
+            prikaziGresku("prezime", "Prezime mora imati barem 2 znaka!");
+            validno = false;
+        }
+
+        // 3. Validacija Emaila (Regex)
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(polja.email.value.trim())) {
             prikaziGresku("email", "Unesite ispravnu email adresu!");
             validno = false;
         }
 
-        // 3. Validacija Telefona
+        // 4. Validacija Telefona
         if (polja.telefon.value.trim().length < 6) {
             prikaziGresku("telefon", "Broj telefona je prekratak!");
             validno = false;
         }
 
-        // 4. Validacija Poruke
+        // 5. Validacija Poruke
         if (polja.poruka.value.trim().length < 10) {
             prikaziGresku("poruka", "Poruka mora imati barem 10 znakova!");
             validno = false;
@@ -131,7 +134,7 @@ if (forma) {
         const statusPolje = document.getElementById("porukaStatus");
         if (validno) {
             statusPolje.innerText = "Uspješno poslano!";
-            statusPolje.style.color = "#00ff00"; // Retro zelena
+            statusPolje.style.color = "#00ff00"; 
             forma.reset();
         } else {
             statusPolje.innerText = "Greška: Popunite polja ispravno.";
@@ -140,17 +143,15 @@ if (forma) {
     });
 }
 
-// Pomoćna funkcija za prikaz greške
 function prikaziGresku(idPolja, poruka) {
     const el = document.getElementById(idPolja);
-    el.style.borderColor = "red";
+    el.classList.add("invalid"); // Dodaje klasu definisanu u CSS-u
     const errorSpan = document.getElementById(idPolja + "Error");
     if(errorSpan) {
         errorSpan.innerText = poruka;
         errorSpan.style.color = "red";
-        errorSpan.style.fontSize = "0.8rem";
+        errorSpan.style.fontSize = "0.7rem";
         errorSpan.style.display = "block";
-        errorSpan.style.marginTop = "5px";
     }
 }
 
