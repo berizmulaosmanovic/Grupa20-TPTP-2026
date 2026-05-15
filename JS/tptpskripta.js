@@ -1,53 +1,64 @@
-const prekidac = document.getElementById("dugme");
-const tijelo = document.body
+document.addEventListener("DOMContentLoaded", () => {
+    const prekidac = document.getElementById("dugme");
+    const tijelo = document.body;
 
-const ucitajMod = () => {
-    const trenutnimod =  localStorage.getItem("nightMode");
-    // Ako je nightMode postavljen na "true", primijeni tamni mod
-    if (trenutnimod === "true") {
-        tijelo.classList.add("dark-mode");
-        prekidac.innerText = "Day Mode";
-    } else {
-        tijelo.classList.remove("dark-mode");
-        prekidac.innerText = "Night Mode";
+    const ucitajMod = () => {
+        const trenutnimod = localStorage.getItem("nightMode");
+        
+        if (trenutnimod === "true") {
+            tijelo.classList.add("dark-mode");
+            if (prekidac) {
+                prekidac.innerText = "Day Mode";
+            }
+        } else {
+            tijelo.classList.remove("dark-mode");
+            if (prekidac) {
+                prekidac.innerText = "Night Mode";
+            }
+        }
+    };
+
+    const toggleNightMode = () => {
+      tijelo.classList.toggle("dark-mode");
+        const jeDark = tijelo.classList.contains("dark-mode");
+        localStorage.setItem("nightMode", jeDark ? "true" : "false");
+
+        if (prekidac) {
+            prekidac.innerText = jeDark ? "Day Mode" : "Night Mode";
+        }
+    };
+
+    if (prekidac) {
+        prekidac.addEventListener("click", toggleNightMode);
     }
-};
 
-ucitajMod(); // Poziv funkcije prilikom učitavanja stranice
-function toggleNightMode() {
-    // Ova funkcija se izvršava čim se klikne na dugme
-    tijelo.classList.toggle("dark-mode");
+    ucitajMod();
 
-// Ispravio i rasčistio funkciju jer su 'const' već zadane
-    
-    if (tijelo.body.classList.contains("dark-mode")) {
-        prekidac.innerText = "Day Mode";
-
-        localStorage.setItem("nightMode", "true"); // Spremi stanje u localStorage
-    } else {
-        prekidac.innerText = "Night Mode";
-        localStorage.setItem("nightMode", "false"); // Spremi stanje u localStorage
+    // FILTRIRANJE KARTICA
+    function filtriraj(kategorija) {
+        const sveKartice = document.querySelectorAll(".kartica");
+        sveKartice.forEach(kartica => {
+            // Provjeravamo klasu ili data-kategoriju
+            const kat = kartica.getAttribute("data-kategorija");
+            if (kategorija === "sve" || kat === kategorija) {
+                kartica.style.display = "block";
+            } else {
+                kartica.style.display = "none";
+            }
+        });
     }
-} // Izvukao funkciju filtriraj od toggleNightMode jer su to dvije odvojene funkcije.
 
-prekidac.addEventListener("click", toggleNightMode); // Dodajemo event listener na dugme da pozove funkciju toggleNightMode kada se klikne
+    // Povezivanje filter dugmadi iz HTML-a
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const kat = btn.getAttribute('data-kategorija');
+            filtriraj(kat);
+        });
+    });
 
-    function filtriraj(kategorija) { // Postaviti id "kartica" na odgovarajuce elemente i
-                                      //  pozvati funkciju sa odgovarajućom kategorijom   
-           const sveKartice = document.querySelectorAll(".kartica");
-           sveKartice.forEach(kartica => {
-               if (kategorija === "sve" || kartica.classList.contains(kategorija)) {
-                   kartica.style.display = "block";
-               } else {
-                   kartica.style.display = "none";
-               }
-           }); 
-    }
+    // TAJMER
     function azurirajTimer() {
-        // Prvo nam treba početni datum, koji je 29.10.1972. 
-        // Zatim ćemo izračunati razliku između tog datuma i trenutnog vremena
-        // Na kraju ćemo tu razliku pretvoriti u dane, sate, minute i sekunde
-        const pocetnidatum = new Date("October 29, 1972 ").getTime(); 
+        const pocetnidatum = new Date("October 29, 1972").getTime();
         const sada = new Date().getTime();
         const razlika = sada - pocetnidatum;
         
@@ -55,73 +66,93 @@ prekidac.addEventListener("click", toggleNightMode); // Dodajemo event listener 
         const sati = Math.floor((razlika % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minute = Math.floor((razlika % (1000 * 60 * 60)) / (1000 * 60));
         const sekundi = Math.floor((razlika % (1000 * 60)) / 1000);
-        document.getElementById("timer").innerText = `${dani}d ${sati}h ${minute}m ${sekundi}s`;
-    }
-    setInterval(azurirajTimer, 1000); // Ova funkcija će se pozivati svakih 1000 milisekundi (1 sekund)
-azurirajTimer(); // Poziv funkcije odmah da ne čekamo prvi interval
-
-// Funkcija za validaciju forme
-function validirajFormu(event) {
-    // 1. Zaustavi automatsko slanje forme
-    event.preventDefault();
-
-    // 2. Dohvatanje vrijednosti iz polja
-    const ime = document.getElementById("ime").value.trim();
-    const prezime = document.getElementById("prezime").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const poruka = document.getElementById("poruka").value.trim();
-    const statusPolje = document.getElementById("porukaStatus");
-
-    // 3. Resetovanje boje i teksta statusa
-    statusPolje.innerText = "";
-    statusPolje.style.color = "red";
-
-    // 4. Provjera pravila (Validacija)
-    if (ime === "" || prezime === "") {
-        statusPolje.innerText = "Greška: Ime i prezime su obavezni.";
-        return;
-    }
-
-    if (ime.length < 2) {
-        statusPolje.innerText = "Greška: Ime mora imati bar 2 slova.";
-        return;
-    }
-
-    // Ručna provjera emaila (tražimo @ i tačku)
-    if (!email.includes("@") || !email.includes(".")) {
-        statusPolje.innerText = "Greška: Email adresa nije ispravna.";
-        return;
-    }
-
-    if (poruka.length < 10) {
-        statusPolje.innerText = "Greška: Poruka mora biti duža od 10 karaktera.";
-        return;
-    }
-
-    // 5. Ako je sve prošlo, ispiši uspjeh
-    statusPolje.innerText = "Uspješno: Vaša poruka je poslana!";
-    statusPolje.style.color = "green";
-    
-    // Ovdje možeš dodati i reset forme nakon uspjeha
-    document.getElementById("kontaktForma").reset();
-}
-
-// 6. Povezivanje funkcije sa formom (dodaj na dno fajla)
-const forma = document.getElementById("kontaktForma");
-if (forma) {
-    forma.addEventListener("submit", validirajFormu);
-}
-
-// Smooth scroll za bookmark navigaciju
-document.querySelectorAll('a[href^="#"]').forEach(sidro => {
-    sidro.addEventListener('click', function (e) {
-        e.preventDefault(); // Spriječi trenutni skok
-
-        const cilj = document.querySelector(this.getAttribute('href'));
-        if (cilj) {
-            cilj.scrollIntoView({
-                behavior: 'smooth' // Ovo omogućava glatko kretanje
-            });
+        
+        const timerElement = document.getElementById("timer");
+        if (timerElement) {
+            timerElement.innerText = `${dani}d ${sati}h ${minute}m ${sekundi}s`;
         }
+    }
+    setInterval(azurirajTimer, 1000);
+    azurirajTimer();
+
+    // VALIDACIJA FORME
+    const forma = document.getElementById("kontaktForma");
+    if (forma) {
+        forma.addEventListener("submit", function(event) {
+            event.preventDefault();
+            const ime = document.getElementById("ime").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const poruka = document.getElementById("poruka").value.trim();
+            const statusPolje = document.getElementById("porukaStatus");
+
+            if (ime.length < 2 || !email.includes("@") || poruka.length < 10) {
+                statusPolje.innerText = "Greška: Provjerite sva polja!";
+                statusPolje.style.color = "red";
+            } else {
+                statusPolje.innerText = "Uspješno poslano!";
+                statusPolje.style.color = "green";
+                forma.reset();
+            }
+        });
+    }
+
+    // SMOOTH SCROLL
+    document.querySelectorAll('a[href^="#"]').forEach(sidro => {
+        sidro.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === "#") return;
+            
+            const cilj = document.querySelector(targetId);
+            if (cilj) {
+                e.preventDefault();
+                cilj.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+        
     });
+// Poruke koje se mijenjaju svakih 2 minute
+const poruke = [
+    { rank: "Novajlija",        boja: null,        sjena: null },
+    { rank: "Istraživač",       boja: "var(--sekundarna-boja)", sjena: null },
+    { rank: "Kolekcionar",      boja: "#ff6f61",   sjena: null },
+    { rank: "Gaming Historian", boja: "#00ff00",   sjena: "0 0 10px #00ff00" },
+    { rank: "Legenda!",         boja: "#ffd166",   sjena: "0 0 15px #ffd166" },
+];
+
+let trenutniIndex = 0;
+const INTERVAL_MS = 2 * 60 * 1000; // 2 minute
+const pocetak = Date.now();
+
+window.onscroll = function() {
+    izracunajXP();
+};
+
+function izracunajXP() {
+    // Bar se puni na osnovu vremena (puni se za ukupno 8 minuta = svih 5 rankova)
+    const ukupnoVrijeme = poruke.length * INTERVAL_MS; // 5 x 2min = 10min
+    const proteklo = Date.now() - pocetak;
+    const scrolled = Math.min(Math.round((proteklo / ukupnoVrijeme) * 100), 100);
+
+    document.getElementById("xp-bar").style.width = scrolled + "%";
+    document.getElementById("procenat-tekst").innerText = scrolled + "%";
+
+    // Rank se mijenja na osnovu vremena
+    const noviIndex = Math.min(
+        Math.floor(proteklo / INTERVAL_MS),
+        poruke.length - 1
+    );
+
+    if (noviIndex !== trenutniIndex) {
+        trenutniIndex = noviIndex;
+        const rank = document.getElementById("rank-tekst");
+        const p = poruke[trenutniIndex];
+        rank.innerText = p.rank;
+        rank.style.color = p.boja || "";
+        rank.style.textShadow = p.sjena || "";
+    }
+}
+
+// Pozovi i bez scrolla da se rank odmah postavi
+setInterval(izracunajXP, 1000); // Provjeri svakih 5s čak i bez scrolla
+izracunajXP();
 });
