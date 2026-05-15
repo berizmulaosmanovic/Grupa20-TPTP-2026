@@ -1,28 +1,46 @@
 /* CSS Varijable */
 :root {
-    --pozadina-glavna: #76369b1e;
-    --boja-teksta: #b67ad1;
-    --pozadina-kartice: #ffffff;
-    --primarna-boja: #552c88;
-    --sekundarna-boja: #A55B4B;
+   --pozadina-glavna: #2d1b3f;      /* Duboka tamna ljubičasta */
+    --boja-teksta: #ffd166;          /* Topla "zalazak sunca" žuta */
+    --pozadina-kartice: #3b2652;     /* Blago svjetlija ljubičasta za dubinu */
+ --primarna-boja: #ff6f61;        /* Koralna crvena (dugmad, naslovi) */
+    --sekundarna-boja: #c49653;
     --sjenka-dugmeta: #884d3f;
     --boja-obruba: #DCA06D;
-    --glavni-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     --razmak: 1rem;
     --radijus: 8px;
     --timer-boja: #aa6bc7;
+    /* Za naslove i dugmad */
+    --retro-font: 'Press Start 2P', cursive;
+    /* Za tekst i duže opise */
+    --glavni-font: 'Orbitron', sans-serif;
+    --opisni-font: 'Orbitron', sans-serif;
+    --nav-font: 'Orbitron', sans-serif; 
+    --boja-dubine: #1a0f25; /* Boja za standardnu temu */
+
+}
+h1, h2, h3, .glavna-navigacija a {
+    text-shadow: 0 0 5px rgba(255, 111, 97, 0.5), 0 0 10px rgba(255, 111, 97, 0.3);
+    transition: text-shadow 0.3s ease;
+    font-family: var(--opisni-font) !important;
 }
 
+h1:hover, .glavna-navigacija a:hover {
+    text-shadow: 0 0 10px var(--sekundarna-boja), 0 0 20px var(--sekundarna-boja);
+}
+button, .filter-btn, .glavna-navigacija a {
+    font-family: 'Orbitron', sans-serif !important;
+}
 /* Tamni mod */
 body.dark-mode {
-    --pozadina-glavna: #121212;
-    --boja-teksta: #065084;
-    --pozadina-kartice: #1e1e1e;
-    --primarna-boja: #320A6B;
-    --sekundarna-boja: #6d37b9;
-    --sjenka-dugmeta: #5e2ea1;
-    --boja-obruba: #320A6B;
-    --timer-boja: #0f3e5f;
+    --pozadina-glavna: #0d0221;      /* Skoro crna svemirska plava */
+    --boja-teksta: #2de2e6;          /* Tirkizna postaje glavna boja teksta */
+    --pozadina-kartice: #1a0b2e;
+    --primarna-boja: #7122fa;        /* Električna ljubičasta */
+    --sekundarna-boja: #f00699;      /* Jarka pink (Magenta) */
+    --boja-obruba: #7122fa;
+    --timer-boja: #f00699;
+    --boja-dubine: #050110; /* Boja za dark mode */
 }
 
 /* Globali reset */
@@ -42,6 +60,8 @@ body {
 
 /* Header i Navigacija ( Layout - flexbox ) */
 header {
+    position: relative;
+    overflow: hidden;
     background-color: var(--primarna-boja);
     color: #ffffff;
     border-bottom: 5px solid rgba(0,0,0,0.3); /* Dodaje dubinu na dnu headera */
@@ -52,12 +72,53 @@ header {
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
+    
+}
+header::before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    z-index: 2;
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
 }
 
+/* Animacija pomjeranja linija */
+@keyframes scanline {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100%); }
+}
+
+header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.05);
+    opacity: 0.1;
+    animation: scanline 8s linear infinite;
+    z-index: 3;
+    pointer-events: none; /* Omogućava klikove kroz animaciju */
+}
 .glavna-navigacija ul {
     list-style: none;
     display: flex;
-    gap: 1.5rem;
+    gap: 1.5rem; /* Razmak između Početna, Eksponati, Kontakt */
+    margin: 0;
+    padding: 0;
+    z-index: 5; /* Osiguraj da je navigacija iznad pozadinskih efekata */
+    position: relative; /* Potrebno da z-index radi */
+}
+
+.glavna-navigacija a, button#dugme {
+    position: relative;
+    z-index: 6; /* Postavi same linkove i dugmad na najviši nivo */
 }
 
 .glavna-navigacija a {
@@ -94,62 +155,193 @@ button#dugme:hover {
 
 /* Footer Stilizacija */
 footer {
+    position: relative; /* Neophodno za animacije */
+    overflow: hidden;   /* Da animacija ne izlazi van footera */
     text-align: center;
-    padding: 2rem;
+    padding: 3rem 2rem;
     margin-top: 4rem;
     background-color: var(--primarna-boja);
     color: white;
-    border-top: 4px solid var(--sekundarna-boja); 
+    border-top: 5px solid rgba(0,0,0,0.3); /* Dubina kao na headeru */
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.3); /* Sjena prema gore */
+    font-family: 'Orbitron', sans-serif !important;
+    text-transform: uppercase;
 }
 
-/* Stil za sve linkove u footeru */
-footer a {
-    color: var(--boja-teksta);
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-    border-bottom: 2px solid transparent; /* Dodaje liniju ispod linka */
+/* CRT Scanlines za footer */
+footer::before {
+    content: " ";
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+    z-index: 1;
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+    opacity: 0.6; /* Malo suptilnije nego gore */
+}
+
+/* Pomična linija za footer */
+footer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.05);
+    opacity: 0.1;
+    animation: scanline 10s linear infinite; /* Koristi istu animaciju kao header */
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Osiguraj da su linkovi iznad animacija */
+footer p, footer a, footer .footer-nav {
+    position: relative;
+    z-index: 5;
+}
+
+/* Stil za linkove */   
+footer a {  
+    color: #ffffff; /* Bijela boja kao u navigaciji */  
+    text-decoration: none;  
+    font-weight: bold;  
+    text-shadow: 0 0 5px rgba(255, 111, 97, 0.5);   
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin: 0 10px;
 }
 
 footer a:hover {
     color: var(--sekundarna-boja);
-    border-bottom: 2px solid var(--sekundarna-boja); /* Linija postaje vidljiva na hover */
-    padding-bottom: 2px; /* Malo podizanje teksta na hover */
+    text-shadow: 0 0 10px var(--sekundarna-boja), 0 0 20px var(--sekundarna-boja);
+    transform: scale(1.1); /* Blago povećanje na hover */
 }
 
+/* 1. Stilizacija cijelog kontejnera menija */
+.filter-meni {
+    width: 100%;
+    max-width: 250px; /* Ograničavamo širinu na desktopu */
+    padding: 1rem;
+   z-index: 10;
+}
+.filter-meni h2 {
+    font-family: var(--glavni-font);
+    color: var(--boja-teksta);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    text-shadow: 0 0 5px var(--primarna-boja);
+}
 
+/* 2. Sređivanje liste unutar menija - OVO UKLANJA POMJERANJE I TAČKICE */
+.filter-meni ul {
+    list-style: none; /* Ubija tačkice */
+    padding: 0;       /* Uklanja defaultni razmak s lijeve strane */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;        /* Razmak između gumba */
+}
 
+/* 3. Osiguraj da gumbi popune prostor */
+.filter-meni .filter-btn {
+    width: 100%;      /* Gumb se rasteže do ivice menija */
+    display: block;
+    text-align: center;
+}
+
+/* 4. RESPONZIVNOST - Da ne bude skupljeno na mobitelu */
+@media screen and (max-width: 900px) {
+    .filter-meni {
+        max-width: 100%; /* Na mobitelu zauzima punu širinu */
+        text-align: center;
+    }
+
+    .filter-meni ul {
+        flex-direction: row; /* Gumbi idu jedan pored drugog */
+        flex-wrap: wrap;     /* Ako ne stanu, idu u novi red */
+        justify-content: center;
+    }
+
+    .filter-meni .filter-btn {
+        width: auto;         /* Na mobitelu gumbi nisu ogromni */
+        min-width: 140px;
+    }
+}
+
+/* Stil za kontejner gumba */
+.filter-meni ul li {
+    position: relative;
+    overflow: hidden; /* Bitno za animaciju sa strana */
+    list-style: none;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+}
 /* Osnovni stil za svako dugme kategorije */
 .filter-btn {
-    background: var(--primarna-boja);
-    line-height: 1;
-    margin-bottom: 1rem;
+ position: relative;
+    width: 100%;
+    display: block;
+    background: var(--primarna-boja); /* Tvoja koralna boja */
     color: white;
     border: none;
     padding: 12px 25px;
-    border-radius: 8px;
     font-weight: bold;
+    font-size : 0.8rem;
     text-transform: uppercase;
-    /* Slojevita sjena za dubinu */
-    box-shadow: 
-        0 6px 0 #11081d, /* Tamniji dio ispod dugmeta */
-        0 8px 15px rgba(0,0,0,0.4);
-    transition: all 0.1s ease;
     cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.1);
+    z-index: 1;
+    transition: color 0.3s ease;
+    background-clip: padding-box;
+    clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+    transition: all 0.3s ease;
+    z-index: 101;
 }
 
+/* Animacija sa strana (Onaj tvoj :before i :after) */
+.filter-btn::before,
+.filter-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: var(--sjenka-dugmeta); /* Tamnija boja koja klizi */
+    z-index: -1;
+    transition: transform 0.4s cubic-bezier(0.5, 0, 0.1, 1);
+}
+
+.filter-btn::before {
+    left: 0;
+    transform: translateX(-100%);
+}
+
+.filter-btn::after {
+    right: 0;
+    transform: translateX(100%);
+}
+
+/* Hover efekat: Klizanje pozadine ka sredini */
 .filter-btn:hover {
+    color: #fcfcfc;
+    clip-path: polygon(0% 0%, 90% 0%, 100% 100%, 10% 100%); /* Kontra kosi ugao na hover */
     background: var(--sekundarna-boja);
-    transform: translateY(2px);
-    box-shadow: 
-        0 4px 0 var(--sjenka-dugmeta), /* Sjena se pomera bliže dugmetu */
-        0 6px 10px rgba(0,0,0,0.3);
 }
 
-.filter-btn:active {
-    transform: translateY(6px); /* Dugme se potpuno "utisne" */
-    box-shadow: none;
+.filter-btn:hover::before {
+    transform: translateX(-50%);
+}
+
+.filter-btn:hover::after {
+    transform: translateX(50%);
+}
+
+/* Da gumbi i dalje imaju 3D osjećaj na dnu */
+.filter-meni ul li {
+
+    box-shadow: 0 6px 0 var(--boja-dubine); /* Sada se boja sama mijenja! */
+    transition: box-shadow 0.4s ease;
 }
 
 /* CSS Grid ( Glavni sadrzaj ) */
@@ -254,6 +446,7 @@ footer a:hover {
 
 body.dark-mode .tabela-sekcija tbody tr:hover {
     background-color: rgba(255, 255, 255, 0.05);
+    font-family: var(--glavni-font);
 }
 
 /* Kartice sa sadrzajem */
@@ -503,7 +696,50 @@ body.dark-mode .pixel {
     background-color: var(--sekundarna-boja);
     opacity: 0.3;
 }
+.bocna-sekcija {
+    background-color: var(--pozadina-kartice);
+    padding: 1.5rem;
+    border-radius: var(--radijus);
+    border: 3px solid var(--boja-obruba);
+    box-shadow: 10px 10px 0px var(--sjenka-dugmeta); /* Isti stil kao tvoji gumbi */
+}
 
+.bocna-sekcija h2 {
+    color: var(--primarna-boja);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+/* Container koji održava 16:9 razmjer videa bez obzira na veličinu ekrana */
+/* Uklanjanje žutih tačkica i poravnanje gumba */
+.filter-meni ul {
+    list-style: none !important; /* Briše tačkice */
+    padding: 0 !important;      /* Briše razmak koji gura gumbe udesno */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Fix za video da ne bude "stisnut" */
+.video-okvir {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 ratio */
+    height: 0;
+    overflow: hidden;
+    background: #000;
+    border: 3px solid var(--boja-obruba);
+    margin-top: 1rem;
+}
+
+.video-okvir iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 /* Različite veličine, brzine i pozicije za svaki piksel */
 .p1 { left: 10%; width: 40px; height: 40px; animation-duration: 12s; animation-delay: 0s; } 
 .p2 { left: 35%; width: 20px; height: 20px; animation-duration: 18s; animation-delay: 2s; }
@@ -561,4 +797,50 @@ body.dark-mode .pixel {
         grid-template-columns: 200px 1fr 300px; /* Filteri | Kartice | Video */
     }
     .galerija-kartica { grid-template-columns: repeat(3, 1fr); }
+}
+
+.xp-kontejner {
+    position: fixed;
+    bottom: 20px;
+    right: 20px; /* Pomjereno u desni ugao da ne smeta kategorijama */
+    left: auto;  /* Poništava prethodni left: 50% */
+    transform: none; /* Poništava centriranje */
+    width: 250px;
+    background: var(--pozadina-kartice);
+    padding: 10px;
+    border: 2px solid var(--boja-obruba);
+    box-shadow: 4px 4px 0px var(--sjenka-dugmeta);
+    z-index: 9999;
+    pointer-events: none; /* Kontejner ne hvata klikove */
+}
+
+/* Samo bar unutra reaguje na miš ako zatreba */
+.xp-info, .xp-pozadina {
+    pointer-events: auto;
+}
+
+.xp-info {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--retro-font);
+    font-size: 0.6rem; /* Press Start 2P je velik, pa ga smanji */
+    margin-bottom: 5px;
+    color: var(--boja-teksta);
+    pointer-events: auto;
+}
+
+.xp-pozadina {
+    width: 100%;
+    height: 15px;
+    background: #000;
+    border: 1px solid var(--boja-teksta);
+    overflow: hidden;
+    pointer-events: auto;
+}
+
+#xp-bar {
+    width: 0%; /* Početna vrijednost */
+    height: 100%;
+    background: linear-gradient(90deg, var(--primarna-boja), var(--sekundarna-boja));
+    transition: width 0.2s ease-out;
 }
