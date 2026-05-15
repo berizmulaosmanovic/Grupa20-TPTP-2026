@@ -530,6 +530,7 @@ body.dark-mode .tabela-sekcija tbody tr:hover {
 /* Polja za unos (Inputi, Select, Textarea) */
 .retro-forma input[type="text"], /* polje za ime */
 .retro-forma input[type="email"], /* polje za email */
+.retro-forma input[type="tel"], /*  polje za telefon */
 .retro-forma select, 
 .retro-forma textarea { 
     width: 100%; 
