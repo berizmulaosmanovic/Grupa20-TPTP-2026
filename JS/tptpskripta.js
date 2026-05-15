@@ -120,10 +120,14 @@ if (forma) {
         }
 
         // 4. Validacija Telefona
-        if (polja.telefon.value.trim().length < 6) {
-            prikaziGresku("telefon", "Broj telefona je prekratak!");
-            validno = false;
-        }
+const telefonVrijednost = polja.telefon.value.trim();
+// Regex: dozvoljava + na početku i samo cifre (minimalno 6 cifara)
+const telefonRegex = /^\+?[0-9]{6,}$/; 
+
+if (!telefonRegex.test(telefonVrijednost)) {
+    prikaziGresku("telefon", "Broj smije sadržavati samo cifre (min. 6)!");
+    validno = false;
+}
 
         // 5. Validacija Poruke
         if (polja.poruka.value.trim().length < 10) {
