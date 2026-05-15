@@ -129,11 +129,7 @@ if (!telefonRegex.test(telefonVrijednost)) {
     validno = false;
 }
 
-        // 5. Validacija Poruke
-        if (polja.poruka.value.trim().length < 10) {
-            prikaziGresku("poruka", "Poruka mora imati barem 10 znakova!");
-            validno = false;
-        }
+   
 
         const statusPolje = document.getElementById("porukaStatus");
         if (validno) {
