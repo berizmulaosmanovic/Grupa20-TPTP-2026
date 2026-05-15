@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="CSS/tptpstil.css">
     <!-- Povezivanje eksterne JS datoteke , defer osigurava da se učita nakon HTML-a -->
     <script src="JS/tptpskripta.js" defer></script>
+    <!-- Povezivanje eksterne font datoteke -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     
@@ -27,7 +29,7 @@
     <!-- ================= HEADER: Glavna navigacija ================= -->
     <!-- <header> se koristi za uvodni sadržaj i glavnu navigaciju -->
     <header>
-        <div class="logo">
+        <div class="typing-efekat">
             <h1>Retro Muzej</h1>
         </div>
         <nav class="glavna-navigacija">
@@ -63,9 +65,8 @@
         <!-- ================= MAIN: Kartice sa sadržajem ================= -->
         <main class="galerija-kartica">
             
-            <!-- Kartica 1 (Nintendo) - Sadrži  <picture> element -->
+            <!-- Kartica 1 (Nintendo) -->
             <article class="kartica" data-kategorija="nintendo">
-                <!--  <picture> omogućava WebP format za brže učitavanje, sa fallback-om na obični JPG -->
                  <img src="slike/nes.jpg" alt="Nintendo Entertainment System (NES) konzola">
                 <h3>NES (1985)</h3>
                 <p>Legendarna 8-bitna konzola koja je spasila industriju videoigara.</p>
@@ -111,7 +112,6 @@
                 <p>Posljednja Segina konzola, prva sa ugrađenim modemom za online igranje.</p>
                 <a href="https://en.wikipedia.org/wiki/Dreamcast" class="kartica-link">Pročitaj više</a>
             </article>
-
              <!-- Kartica 7 (Sony) -->
             <article class="kartica" data-kategorija="sony">
                 <img src="slike/ps11.jpg" alt="Originalna Sony PlayStation 1 konzola">
@@ -134,18 +134,23 @@
                 <a href="https://en.wikipedia.org/wiki/PlayStation_2" class="kartica-link">Pročitaj više</a>
             </article>
 
-
         </main>
 
-        <!-- ================= ASIDE: Bočna sekcija (Embed) ================= -->
-        <aside class="bocna-sekcija">
-            <h2>Historija Gaminga</h2>
-            <p>Pogledajte kratki dokumentarac o evoluciji retro konzola.</p>
-            <!--  iframe se koristi za embedovanje YouTube videa. Postavljen je width na 100% za responzivnost -->
-          <iframe width="100%" height="250" src="https://www.youtube.com/embed/vzoAG66Ry2Q?si=4qSQFGndhg065uoB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"   referrerpolicy="strict-origin-when-cross-origin"  allowfullscreen></iframe>
-        </aside>
-
+<aside class="bocna-sekcija">
+    <h2>Historija Gaminga</h2>
+    <p>Pogledajte 49 godina evolucije konzola u 10 minuta.</p>
+    <div class="video-okvir">
+        <iframe 
+            src="https://www.youtube.com/embed/27_xEN5srVI" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            referrerpolicy='strict-origin-when-cross-origin'
+            allowfullscreen>
+        </iframe>
     </div>
+</aside>
+
+        </div> <!-- Zatvaranje layout omotača -->
 
     <!-- ================= FOOTER: Podnožje stranice ================= -->
     <footer id="footerbody">
@@ -159,6 +164,14 @@
             <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Discord</a><!--Nemamo drustvenih mreza, ovo je samo bilo za izgeld stranice-->
         </div>
     </footer>
-
+<div class="xp-kontejner">
+    <div class="xp-info">
+        <span id="rank-tekst">Novajlija</span>
+        <span id="procenat-tekst">0%</span>
+    </div>
+    <div class="xp-pozadina">
+        <div id="xp-bar"></div>
+    </div>
+</div>
 </body>
 </html>
